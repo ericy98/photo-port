@@ -1,9 +1,16 @@
-import React from 'react';
-import { capitalizeFirstLetter} from '../../utils/helpers';
+import React, { useState } from 'react';
+import { capitalizeFirstLetter } from '../../utils/helpers';
 
-const Nav = () => {
+const Nav = (props) => {
     // must have a key attribute when map over JSX
     // after map() return only a single JSX element
+
+    const {
+        categories = [], 
+        setCurrentCategory, 
+        currentCategory
+    } = props;
+
     return (
         <header className="flex-row px-1">
             <h2>
@@ -22,11 +29,13 @@ const Nav = () => {
                         <span>Contact</span>
                     </li>
                     {categories.map((category) => (
-                        <li
-                            className="mx-1"
-                            key={capitalizeFirstLetter(category.name)}
-                        >
-                            <span onClick={() => categorySelected(capitalizeFirstLetter(category.name))}>
+                        <li className={`mx-1 ${currentCategory.name === category.name && 'navActive'
+                            }`} key={category.name}>
+                            <span
+                                onClick={() => {
+                                    setCurrentCategory(category)
+                                }}
+                            >
                                 {capitalizeFirstLetter(category.name)}
                             </span>
                         </li>
@@ -36,23 +45,5 @@ const Nav = () => {
         </header>
     );
 }
-
-const categorySelected = name => {
-    console.log(`${name} clicked`)
-}
-
-const categories = [
-    {
-        name: "commercial",
-        description:
-            "Photos of grocery stores, food trucks, and other commercial projects",
-    },
-    { name: "portraits", description: "Portraits of people in my life" },
-    { name: "food", description: "Delicious delicacies" },
-    {
-        name: "landscape",
-        description: "Fields, farmhouses, waterfalls, and the beauty of nature",
-    },
-];
 
 export default Nav;
