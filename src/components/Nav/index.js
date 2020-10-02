@@ -1,4 +1,5 @@
 import React from 'react';
+import { capitalizeFirstLetter} from '../../utils/helpers';
 
 const Nav = () => {
     // must have a key attribute when map over JSX
@@ -23,10 +24,10 @@ const Nav = () => {
                     {categories.map((category) => (
                         <li
                             className="mx-1"
-                            key={category.name}
+                            key={capitalizeFirstLetter(category.name)}
                         >
-                            <span onClick={() => categorySelected(category.name)}>
-                                {category.name}
+                            <span onClick={() => categorySelected(capitalizeFirstLetter(category.name))}>
+                                {capitalizeFirstLetter(category.name)}
                             </span>
                         </li>
                     ))}
