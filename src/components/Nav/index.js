@@ -4,17 +4,17 @@ const Nav = () => {
     // must have a key attribute when map over JSX
     // after map() return only a single JSX element
     return (
-        <header>
+        <header className="flex-row px-1">
             <h2>
-                <a href="/">
+                <a data-testid="link" href="/">
                     <span role="img" aria-label="camera"> 📸</span> Oh Snap!
                 </a>
             </h2>
             <nav>
                 <ul className="flex-row">
                     <li className="mx-2">
-                        <a href="#about">
-                            About Me
+                        <a data-testid="about" href="#about">
+                            About me
                         </a>
                     </li>
                     <li>
