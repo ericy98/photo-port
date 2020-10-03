@@ -1,16 +1,35 @@
 import React, { useState } from 'react';
+import { validateEmail } from '../../utils/helpers'
 
 function ContactForm() {
 
-
     const [formState, setFormState] = useState({ name: '', email: '', message: '' });
-    
-    // destructure object into named properties
-    const { name, email, message } = formState; 
+    const { name, email, message } = formState;// destructure object into named properties
+    const [errorMessage, setErrorMessage] = useState('');
 
     function handleChange(e) {
+        if (e.target.name === 'email') {
+            const isValid = validateEmail(e.target.value);
+            console.log(isValid);
+            if (!isValid) {
+                setErrorMessage('Your email is invalid')
+            } else {
+                setErrorMessage('');
+            }
+            //checking if value for message and name are blank
+        } else {
+            if (!e.target.value.length) {
+                setErrorMessage(`${e.target.name} is required.`)
+            } else {
+                setErrorMessage();
+            }
+        }
+
         // spread op; sync form data w/ dynamic property names
-        setFormState({...formState, [e.target.name]: e.target.value})
+        if (!errorMessage) {
+            setFormState({ ...formState, [e.target.name]: e.target.value });
+        }
+
     }
 
     function handleSubmit(e) {
@@ -32,7 +51,7 @@ function ContactForm() {
                 </div>
                 <div>
                     <label htmlFor="message">Message:</label>
-                    <textarea name="message" rows="5"  onChange={handleChange} defaultValue={message} />
+                    <textarea name="message" rows="5" onChange={handleChange} defaultValue={message} />
                 </div>
                 <button type="submit">Submit</button>
             </form>
