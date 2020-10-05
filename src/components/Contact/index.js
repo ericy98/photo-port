@@ -36,23 +36,28 @@ function ContactForm() {
         e.preventDefault();
         console.log(formState);
     }
-
+    // errorMessage conditional statement [if()]
     return (
         <section>
             <h1>Contact</h1>
             <form id="contact-form" onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="name">Name:</label>
-                    <input type="text" name="name" onChange={handleChange} defaultValue={name} />
+                    <input type="text" name="name" onBlur={handleChange} defaultValue={name} />
                 </div>
                 <div>
                     <label htmlFor="email">Email address:</label>
-                    <input type="email" name="email" onChange={handleChange} defaultValue={email} />
+                    <input type="email" name="email" onBlur={handleChange} defaultValue={email} />
                 </div>
                 <div>
                     <label htmlFor="message">Message:</label>
-                    <textarea name="message" rows="5" onChange={handleChange} defaultValue={message} />
+                    <textarea name="message" rows="5" onBlur={handleChange} defaultValue={message} />
                 </div>
+                {errorMessage && (
+                    <div>
+                        <p className="error-text">{errorMessage}</p>
+                    </div>
+                )}
                 <button type="submit">Submit</button>
             </form>
         </section>
