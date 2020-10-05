@@ -9,8 +9,11 @@ afterEach(cleanup);
 const categories = [
     { name: 'portraits', description: 'Portraits of people in my life' }
 ]
+
 const mockCurrentCategory = jest.fn();
 const mockSetCurrentCategory = jest.fn();
+const mockContactSelected = jest.fn();
+const mockSetContactSelected = jest.fn();
 
 describe('Nav component', () => {
     // baseline test
@@ -19,6 +22,8 @@ describe('Nav component', () => {
             categories={categories}
             setCurrentCategory={mockSetCurrentCategory}
             currentCategory={mockCurrentCategory}
+            contactSelected={mockContactSelected}
+            setContactSelected={mockSetContactSelected}
         />);
     });
 
@@ -28,6 +33,8 @@ describe('Nav component', () => {
             categories={categories}
             setCurrentCategory={mockSetCurrentCategory}
             currentCategory={mockCurrentCategory}
+            contactSelected={mockContactSelected}
+            setContactSelected={mockSetContactSelected}
         />);
 
         expect(asFragment()).toMatchSnapshot();
@@ -40,6 +47,8 @@ describe('emoji is visable', () => {
             categories={categories}
             setCurrentCategory={mockSetCurrentCategory}
             currentCategory={mockCurrentCategory}
+            contactSelected={mockContactSelected}
+            setContactSelected={mockSetContactSelected}
         />);
 
         expect(getByLabelText('camera')).toHaveTextContent('📸');
@@ -47,11 +56,13 @@ describe('emoji is visable', () => {
 })
 
 describe('links are visable', () => {
-    it('insets text into the links', () => {
+    it('inserts text into the links', () => {
         const { getByTestId } = render(<Nav
             categories={categories}
             setCurrentCategory={mockSetCurrentCategory}
             currentCategory={mockCurrentCategory}
+            contactSelected={mockContactSelected}
+            setContactSelected={mockSetContactSelected}
         />);
 
         expect(getByTestId('link')).toHaveTextContent('Oh Snap!');
